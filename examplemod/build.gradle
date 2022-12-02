@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.samjo'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":2s-complement")
+    implementation files(findProperty("game_jar_path"))
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task buildModZip(type: Zip) {
+    from fileTree('build/classes/java/main') {
+        include '**/*.class'
+    }
+    from fileTree('build/resources/main') {
+        include 'mod.properties'
+    }
+    archiveName 'ExampleMod.zip'
+    destinationDir(file('../mods/'))
+}
