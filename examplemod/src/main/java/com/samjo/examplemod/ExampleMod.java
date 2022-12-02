@@ -65,11 +65,11 @@ public class ExampleMod extends Mod {
             }
 
             else if (Input.checkFrameKey(KeyEvent.VK_S)) {
-                selectedRoomY = Math.min(selectedRoomY + 1, 7);
+                selectedRoomY = Math.min(selectedRoomY + 1, MAP_ROWS - 1);
             }
 
             else if (Input.checkFrameKey(KeyEvent.VK_D)) {
-                selectedRoomX = Math.min(selectedRoomX + 1, 15);
+                selectedRoomX = Math.min(selectedRoomX + 1, MAP_COLUMNS - 1);
             }
         }
         highlight.visible = mapShowing;
