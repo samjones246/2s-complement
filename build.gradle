@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.samjo'
-version '1.0'
+version '0.1'
 
 repositories {
     mavenCentral()
@@ -23,12 +23,12 @@ dependencies {
 
 task buildJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': '2\'s complement mod loader',
-                   'Implementation-Version': 1.0,
+        attributes 'Implementation-Title': '2\'s Complement Mod Loader',
+                   'Implementation-Version': archiveVersion,
                    'Agent-Class': 'com.samjo.modloader.LoaderAgent',
                    'Premain-Class': 'com.samjo.modloader.LoaderAgent'
     }
-    archivesBaseName = 'Agent'
+    archivesBaseName = "2sComplement"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
