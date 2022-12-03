@@ -28,7 +28,33 @@ task buildJar(type: Jar) {
                    'Agent-Class': 'com.samjo.modloader.LoaderAgent',
                    'Premain-Class': 'com.samjo.modloader.LoaderAgent'
     }
-    archivesBaseName = "2sComplement"
+    archiveName "Loader.jar"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+def releaseTargets = copySpec {
+    from layout.buildDirectory.file("libs/Loader.jar")
+    rename { 'bin/Loader.jar' }
+
+    from layout.projectDirectory.file("run-modded.bat")
+}
+
+task prepReleaseJar(type: Copy) {
+    from "build/libs/Loader.jar"
+    into "releases/$version/bin/"
+}
+
+task prepReleaseLauncher(type: Copy) {
+    from "run-modded.bat"
+    into "releases/$version/"
+}
+
+task packageRelease(type: Zip, dependsOn: ['prepReleaseJar', 'prepReleaseLauncher']) {
+    from fileTree("releases/${version}/")
+    archiveName "2s-complement-${version}.zip"
+    destinationDir(file("releases/"))
+    doLast {
+        delete "releases/$version"
+    }
 }

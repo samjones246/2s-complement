@@ -1,0 +1,1 @@
+jre\bin\java.exe -javaagent:bin\Loader.jar -jar bin\game.jar
